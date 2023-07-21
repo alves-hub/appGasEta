@@ -11,23 +11,21 @@ import android.widget.Toast;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
-import org.w3c.dom.Text;
-
 import devandroid.alves.appgaseta.R;
 import devandroid.alves.appgaseta.applistacurso.apoio.UtilGasEta;
-import devandroid.alves.appgaseta.applistacurso.controller.GasEtaController;
+import devandroid.alves.appgaseta.applistacurso.controller.CombustivelController;
 import devandroid.alves.appgaseta.applistacurso.model.Combustivel;
 
-public class GasEtaActivity  extends AppCompatActivity {
+public class GasEtaActivity extends AppCompatActivity {
     Double valorGasolina;
     Double valorEtanol;
     String recomendacao;
 
-    UtilGasEta  utilGasEta;
-    GasEtaController controller;
-    //GasEtaController gasEtaController = new GasEtaController();
+    CombustivelController controllers;
+
     Combustivel combustivelGasolina;
     Combustivel combustivelEtanol;
+
     EditText editTextLitroGasolina;
     EditText editTextLitroEtanol;
     Button btnCalcular;
@@ -52,15 +50,6 @@ public class GasEtaActivity  extends AppCompatActivity {
         btnFinalizar = findViewById(R.id.btnFinalizar);
         textResultado = findViewById(R.id.textResultado);
 
-
-        //UtilGasEta.MetodoEstatico();
-        //utilGasEta.MetodoNaoStatico();
-
-        //Exibindo mensagem do return do metodo na tela
-        /*Toast.makeText(GasEtaActivity.this,
-                UtilGasEta.CalcularMelhorOpcao(5.50,3.70),
-                Toast.LENGTH_LONG).show();*/
-
         //acao botoes
         btnCalcular.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -68,48 +57,56 @@ public class GasEtaActivity  extends AppCompatActivity {
                 boolean isDadoOk = true;
 
 
-
                 //tratando erro campo vazio
-                if (TextUtils.isEmpty(editTextLitroGasolina.getText())){
+                if (TextUtils.isEmpty(editTextLitroGasolina.getText())) {
                     editTextLitroGasolina.setError("* Campo Obrigatório");
                     //manter foco do curso no campo
                     editTextLitroGasolina.requestFocus();
                     isDadoOk = false;
-                }else if (TextUtils.isEmpty(editTextLitroEtanol.getText())) {
+                    // manter botao salvar desabilitado
+                    btnSalvar.setEnabled(false);
+                } else if (TextUtils.isEmpty(editTextLitroEtanol.getText())) {
                     editTextLitroEtanol.setError("* Campo Obrigatório");
                     editTextLitroEtanol.requestFocus();
                     isDadoOk = false;
-                } else if (isDadoOk){
+                    // manter botao salvar desabilitado
+                    btnSalvar.setEnabled(false);
+                } else if (isDadoOk) {
                     valorGasolina = Double.parseDouble(editTextLitroGasolina.getText().toString());
                     valorEtanol = Double.parseDouble(editTextLitroEtanol.getText().toString());
                     recomendacao = UtilGasEta.CalcularMelhorOpcao(valorGasolina, valorEtanol);
 
                     textResultado.setText(recomendacao);
+                    btnSalvar.setEnabled(true);
 
-                }else{
+                } else {
                     Toast.makeText(GasEtaActivity.this,
                             "Por favor, digite os dados Obrigatórios...", Toast.LENGTH_LONG).show();
+                    btnSalvar.setEnabled(false);
                 }
-
             }
         });
 
         btnSalvar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-            // TODO DESABILITAR BOTAO SALVAR
+
+                // TODO: EditText inputType
                 combustivelGasolina = new Combustivel();
                 combustivelEtanol = new Combustivel();
+
                 combustivelGasolina.setNomeCombustivel("Gasolina");
-                combustivelGasolina.setPrecoCombustivel(valorGasolina);
+                //combustivelGasolina.setPrecoCombustivel(valorGasolina);
 
                 combustivelEtanol.setNomeCombustivel("Etanol");
                 combustivelEtanol.setPrecoCombustivel(valorEtanol);
 
-                combustivelGasolina.setRecomendacao(UtilGasEta.CalcularMelhorOpcao(valorGasolina,valorEtanol));
+                combustivelGasolina.setRecomendacao(UtilGasEta.CalcularMelhorOpcao(valorGasolina, valorEtanol));
                 combustivelEtanol.setRecomendacao(UtilGasEta.CalcularMelhorOpcao(valorGasolina,valorEtanol));
 
-                int parada = 0;
+                controllers.salvar(combustivelGasolina);
+                controllers.salvar(combustivelEtanol);
+
             }
         });
 
@@ -118,6 +115,7 @@ public class GasEtaActivity  extends AppCompatActivity {
             public void onClick(View v) {
                 editTextLitroGasolina.setText("");
                 editTextLitroEtanol.setText("");
+                btnSalvar.setEnabled(false);
             }
         });
 
