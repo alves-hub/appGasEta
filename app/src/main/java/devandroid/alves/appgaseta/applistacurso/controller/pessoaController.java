@@ -6,7 +6,6 @@ import android.util.Log;
 import androidx.annotation.NonNull;
 
 import devandroid.alves.appgaseta.applistacurso.model.Pessoa;
-import devandroid.alves.appgaseta.applistacurso.view.MainActivity;
 
 public class pessoaController {
     SharedPreferences preferences;
