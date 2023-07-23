@@ -28,9 +28,8 @@ public class CombustivelController extends GasEtaDB {
         listaGasEta = preferences.edit();
     }
 
-    public void salvar(Combustivel combustivel){
+    public void Salvar(Combustivel combustivel){
         Log.d("MVC Controller","Controller iniciado..." + combustivel.toString());
-        ContentValues dados = new ContentValues();
 
         // inserindo dados na lista
         listaGasEta.putString("Combustivel", combustivel.getNomeCombustivel());
@@ -38,7 +37,9 @@ public class CombustivelController extends GasEtaDB {
         listaGasEta.putString("Recomendacao",  combustivel.getRecomendacao());
         listaGasEta.apply();
 
-        // Salvando na base de dados
+       // instaciando objeto
+        ContentValues dados = new ContentValues();
+        // Pegando valores para salvar na base de dados
         dados.put("nomeCombustivel", combustivel.getNomeCombustivel());
         dados.put("precoCombustivel", combustivel.getPrecoCombustivel());
         dados.put("recomendacao", combustivel.getRecomendacao());

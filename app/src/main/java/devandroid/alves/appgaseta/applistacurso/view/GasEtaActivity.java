@@ -1,7 +1,9 @@
 package devandroid.alves.appgaseta.applistacurso.view;
 
+import android.content.ContentValues;
 import android.os.Bundle;
 import android.text.TextUtils;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -14,18 +16,16 @@ import androidx.appcompat.app.AppCompatActivity;
 import devandroid.alves.appgaseta.R;
 import devandroid.alves.appgaseta.applistacurso.apoio.UtilGasEta;
 import devandroid.alves.appgaseta.applistacurso.controller.CombustivelController;
+import devandroid.alves.appgaseta.applistacurso.database.GasEtaDB;
 import devandroid.alves.appgaseta.applistacurso.model.Combustivel;
 
 public class GasEtaActivity extends AppCompatActivity {
     Double valorGasolina;
     Double valorEtanol;
     String recomendacao;
-
+    Combustivel combustivelGas = new Combustivel();
+    Combustivel combustivelEta = new Combustivel();
     CombustivelController controller;
-
-     private Combustivel combustivelGas = new Combustivel();
-    private Combustivel combustivelEta = new Combustivel();
-
     EditText editTextLitroGasolina;
     EditText editTextLitroEtanol;
     Button btnCalcular;
@@ -86,10 +86,10 @@ public class GasEtaActivity extends AppCompatActivity {
                 }
             }
         });
-        
+
 // ERROR AO CLICAR NO BOTAO SALVAR 
         btnSalvar.setOnClickListener(new View.OnClickListener() {
-            @Override
+
             public void onClick(View v) {
 
                 combustivelGas.setNomeCombustivel("Gasolina");
@@ -99,10 +99,10 @@ public class GasEtaActivity extends AppCompatActivity {
                 combustivelEta.setPrecoCombustivel(valorEtanol);
 
                 combustivelGas.setRecomendacao(UtilGasEta.CalcularMelhorOpcao(valorGasolina, valorEtanol));
-                combustivelEta.setRecomendacao(UtilGasEta.CalcularMelhorOpcao(valorGasolina,valorEtanol));
+                combustivelEta.setRecomendacao(UtilGasEta.CalcularMelhorOpcao(valorGasolina, valorEtanol));
 
-                controller.salvar(combustivelGas);
-                controller.salvar(combustivelEta);
+                controller.Salvar(combustivelGas);
+                controller.Salvar(combustivelEta);
 
             }
         });
@@ -125,5 +125,8 @@ public class GasEtaActivity extends AppCompatActivity {
             }
         });
 
+    }
+
+    private void salvarObjeto(String combustivel, ContentValues dados) {
     }
 }

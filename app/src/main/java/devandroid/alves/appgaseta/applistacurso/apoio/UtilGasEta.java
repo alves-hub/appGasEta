@@ -29,7 +29,6 @@ public class UtilGasEta {
             } else {
                 msgRetorno = "Abasteça com Etanol!";
             }
-
         return msgRetorno;
     }
 }
