@@ -86,7 +86,8 @@ public class GasEtaActivity extends AppCompatActivity {
                 }
             }
         });
-
+        
+// ERROR AO CLICAR NO BOTAO SALVAR 
         btnSalvar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
