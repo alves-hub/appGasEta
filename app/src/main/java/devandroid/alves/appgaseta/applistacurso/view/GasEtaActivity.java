@@ -21,10 +21,10 @@ public class GasEtaActivity extends AppCompatActivity {
     Double valorEtanol;
     String recomendacao;
 
-    CombustivelController controllers;
+    CombustivelController controller;
 
-    Combustivel combustivelGasolina;
-    Combustivel combustivelEtanol;
+     private Combustivel combustivelGas = new Combustivel();
+    private Combustivel combustivelEta = new Combustivel();
 
     EditText editTextLitroGasolina;
     EditText editTextLitroEtanol;
@@ -91,21 +91,17 @@ public class GasEtaActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
 
-                // TODO: EditText inputType
-                combustivelGasolina = new Combustivel();
-                combustivelEtanol = new Combustivel();
+                combustivelGas.setNomeCombustivel("Gasolina");
+                combustivelGas.setPrecoCombustivel(valorGasolina);
 
-                combustivelGasolina.setNomeCombustivel("Gasolina");
-                //combustivelGasolina.setPrecoCombustivel(valorGasolina);
+                combustivelEta.setNomeCombustivel("Etanol");
+                combustivelEta.setPrecoCombustivel(valorEtanol);
 
-                combustivelEtanol.setNomeCombustivel("Etanol");
-                combustivelEtanol.setPrecoCombustivel(valorEtanol);
+                combustivelGas.setRecomendacao(UtilGasEta.CalcularMelhorOpcao(valorGasolina, valorEtanol));
+                combustivelEta.setRecomendacao(UtilGasEta.CalcularMelhorOpcao(valorGasolina,valorEtanol));
 
-                combustivelGasolina.setRecomendacao(UtilGasEta.CalcularMelhorOpcao(valorGasolina, valorEtanol));
-                combustivelEtanol.setRecomendacao(UtilGasEta.CalcularMelhorOpcao(valorGasolina,valorEtanol));
-
-                controllers.salvar(combustivelGasolina);
-                controllers.salvar(combustivelEtanol);
+                controller.salvar(combustivelGas);
+                controller.salvar(combustivelEta);
 
             }
         });

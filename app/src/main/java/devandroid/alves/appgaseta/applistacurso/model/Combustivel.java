@@ -1,10 +1,5 @@
 package devandroid.alves.appgaseta.applistacurso.model;
 
-import androidx.annotation.NonNull;
-import androidx.annotation.StringDef;
-
-import javax.xml.transform.Source;
-
 public class Combustivel {
     private String nomeCombustivel;
     private Double precoCombustivel;
@@ -14,8 +9,8 @@ public class Combustivel {
         return nomeCombustivel;
     }
 
-    public void setNomeCombustivel(String nomeCombustivel) {
-        this.nomeCombustivel = nomeCombustivel;
+    public void setNomeCombustivel(String nameCombustive) {
+        this. nomeCombustivel  = nomeCombustivel;
     }
 
     public Double getPrecoCombustivel() {

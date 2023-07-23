@@ -1,12 +1,14 @@
 package devandroid.alves.appgaseta.applistacurso.controller;
 
+import android.content.ContentValues;
 import android.content.SharedPreferences;
 import android.util.Log;
 
+import devandroid.alves.appgaseta.applistacurso.database.GasEtaDB;
 import devandroid.alves.appgaseta.applistacurso.model.Combustivel;
 import devandroid.alves.appgaseta.applistacurso.view.GasEtaActivity;
 
-public class CombustivelController {
+public class CombustivelController extends GasEtaDB {
 
     Combustivel combustivel;
 
@@ -20,17 +22,28 @@ public class CombustivelController {
     public static final String NAME_PREFERENCES = "pref_listaGasEta";
 
     public CombustivelController(GasEtaActivity gasEtaActivity) {
+        super(gasEtaActivity);
+
         preferences = gasEtaActivity.getSharedPreferences(NAME_PREFERENCES, 0);
         listaGasEta = preferences.edit();
     }
 
     public void salvar(Combustivel combustivel){
         Log.d("MVC Controller","Controller iniciado..." + combustivel.toString());
+        ContentValues dados = new ContentValues();
 
         // inserindo dados na lista
         listaGasEta.putString("Combustivel", combustivel.getNomeCombustivel());
         listaGasEta.putString ("PreçoCombustivel", String.valueOf(combustivel.getPrecoCombustivel()));
         listaGasEta.putString("Recomendacao",  combustivel.getRecomendacao());
         listaGasEta.apply();
+
+        // Salvando na base de dados
+        dados.put("nomeCombustivel", combustivel.getNomeCombustivel());
+        dados.put("precoCombustivel", combustivel.getPrecoCombustivel());
+        dados.put("recomendacao", combustivel.getRecomendacao());
+
+        salvarObjeto("Combustivel",dados);
+
     }
 }

@@ -7,6 +7,7 @@ import android.os.Bundle;
 import android.os.Handler;
 
 import devandroid.alves.appgaseta.R;
+import devandroid.alves.appgaseta.applistacurso.database.GasEtaDB;
 
 public class SplashActivity extends AppCompatActivity {
 
@@ -25,6 +26,9 @@ public class SplashActivity extends AppCompatActivity {
         new Handler().postDelayed(new Runnable() {
             @Override
             public void run() {
+
+                GasEtaDB gasEtaDB = new GasEtaDB(SplashActivity.this);
+
                 // informa tela atual com this e para onde vao direcionar .class
                 Intent telaPrincipal = new Intent(SplashActivity.this, GasEtaActivity.class);
                 startActivity(telaPrincipal);
