@@ -11,6 +11,8 @@ import android.widget.Toast;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
+import java.util.List;
+
 import devandroid.alves.appgaseta.R;
 import devandroid.alves.appgaseta.applistacurso.apoio.UtilGasEta;
 import devandroid.alves.appgaseta.applistacurso.controller.CombustivelController;
@@ -20,11 +22,9 @@ public class GasEtaActivity extends AppCompatActivity {
     Double valorGasolina;
     Double valorEtanol;
     String recomendacao;
-
     CombustivelController controller;
-
-     private Combustivel combustivelGas = new Combustivel();
-    private Combustivel combustivelEta = new Combustivel();
+    Combustivel combustivelGas;
+    Combustivel combustivelEta;
 
     EditText editTextLitroGasolina;
     EditText editTextLitroEtanol;
@@ -35,12 +35,17 @@ public class GasEtaActivity extends AppCompatActivity {
 
     TextView textResultado;
 
+    List<Combustivel> dados;
+
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
         setContentView(R.layout.activity_gaseta);
+
+        controller = new CombustivelController(GasEtaActivity.this);
+        dados = controller.getListaDeDados();
 
         editTextLitroGasolina = findViewById(R.id.editTextLitroGasolina);
         editTextLitroEtanol = findViewById(R.id.editTextLitroEtanol);
@@ -91,6 +96,8 @@ public class GasEtaActivity extends AppCompatActivity {
         btnSalvar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                combustivelGas = new Combustivel();
+                combustivelEta = new Combustivel();
 
                 combustivelGas.setNomeCombustivel("Gasolina");
                 combustivelGas.setPrecoCombustivel(valorGasolina);

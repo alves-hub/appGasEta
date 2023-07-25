@@ -4,13 +4,13 @@ import android.content.ContentValues;
 import android.content.SharedPreferences;
 import android.util.Log;
 
+import java.util.List;
+
 import devandroid.alves.appgaseta.applistacurso.database.GasEtaDB;
 import devandroid.alves.appgaseta.applistacurso.model.Combustivel;
 import devandroid.alves.appgaseta.applistacurso.view.GasEtaActivity;
 
 public class CombustivelController extends GasEtaDB {
-
-    Combustivel combustivel;
 
     // declarar objeto do Shared
     SharedPreferences preferences;
@@ -29,8 +29,9 @@ public class CombustivelController extends GasEtaDB {
     }
 
     public void salvar(Combustivel combustivel){
-        Log.d("MVC Controller","Controller iniciado..." + combustivel.toString());
         ContentValues dados = new ContentValues();
+
+        Log.d("MVC Controller","Controller iniciado..." + combustivel.toString());
 
         // inserindo dados na lista
         listaGasEta.putString("Combustivel", combustivel.getNomeCombustivel());
@@ -45,5 +46,9 @@ public class CombustivelController extends GasEtaDB {
 
         salvarObjeto("Combustivel",dados);
 
+    }
+
+    public List<Combustivel> getListaDeDados(){
+        return listarDados();
     }
 }

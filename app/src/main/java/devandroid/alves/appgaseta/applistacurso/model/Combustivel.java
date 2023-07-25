@@ -5,12 +5,22 @@ public class Combustivel {
     private Double precoCombustivel;
     private String recomendacao;
 
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
+
+    private  int id;
+
     public String getNomeCombustivel() {
         return nomeCombustivel;
     }
 
-    public void setNomeCombustivel(String nameCombustive) {
-        this. nomeCombustivel  = nomeCombustivel;
+    public void setNomeCombustivel(String nomeCombustive) {
+        this. nomeCombustivel  = nomeCombustive;
     }
 
     public Double getPrecoCombustivel() {
@@ -29,3 +39,4 @@ public class Combustivel {
         this.recomendacao = recomendacao;
     }
 }
+
