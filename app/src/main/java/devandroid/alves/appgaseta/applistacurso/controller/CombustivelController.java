@@ -51,4 +51,16 @@ public class CombustivelController extends GasEtaDB {
     public List<Combustivel> getListaDeDados(){
         return listarDados();
     }
+
+    public void alterarDados(Combustivel combustivel){
+        ContentValues dados = new ContentValues();
+
+        dados.put("id", combustivel.getId());
+        dados.put("nomeCombustivel", combustivel.getNomeCombustivel());
+        dados.put("precoCombustivel", combustivel.getPrecoCombustivel());
+        dados.put("recomendacao", combustivel.getRecomendacao());
+
+        //PASSANDO NOME DA TABELA E OS DADOS COLETADOS NO GET PARA METODO DO BANCO DE DADOS GasEtaDB
+        alterarObjeto("Combustivel",dados);
+    }
 }

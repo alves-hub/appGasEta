@@ -88,6 +88,18 @@ public class GasEtaDB extends SQLiteOpenHelper {
         return lista;
     }
 
+    public void alterarObjeto(String tabela, ContentValues dados){
+
+        //ID do registro a ser alterado (PK)
+        // update TABLE set campo = novo dado WHERE id =?
+
+        int id = dados.getAsInteger("id");
+
+        //Alterando o dado na base de dados identificando pelo id
+        db.update(tabela,dados,"id=?",
+                new String[]{Integer.toString(id)});
+    }
+
 }
 
 

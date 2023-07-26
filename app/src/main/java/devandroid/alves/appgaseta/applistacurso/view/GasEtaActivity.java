@@ -37,7 +37,6 @@ public class GasEtaActivity extends AppCompatActivity {
 
     List<Combustivel> dados;
 
-
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -46,6 +45,15 @@ public class GasEtaActivity extends AppCompatActivity {
 
         controller = new CombustivelController(GasEtaActivity.this);
         dados = controller.getListaDeDados();
+        // PEGANDO ITEM PARA ALTERACAO ATRAVES DO VETOR
+       Combustivel objAlterar = dados.get(4);
+        //POPULANDO VALORES ALTERADO
+       objAlterar.setNomeCombustivel("***EtanolTest**");
+       objAlterar.setPrecoCombustivel(2.10);
+       objAlterar.setRecomendacao("Nao abastecer");
+
+       // PASSANDO DADS A SER ALTERADOS PARA CONTROLADORA
+       controller.alterarDados(objAlterar);
 
         editTextLitroGasolina = findViewById(R.id.editTextLitroGasolina);
         editTextLitroEtanol = findViewById(R.id.editTextLitroEtanol);
