@@ -100,25 +100,9 @@ public class GasEtaDB extends SQLiteOpenHelper {
                 new String[]{Integer.toString(id)});
     }
 
+    public void deletarObject(String tabela, int id){
+     db.delete(tabela,"id=?",
+            new String[]{Integer.toString(id)});
+    }
+
 }
-
-
-// Crias metodos para implementar CRUD
-// C = Create criar o banco de dados e as tabelas
-// Create database nome_banco_de_dados.db (SQL)
-// 1 - Nome do banco de Dados
-// 2 - Versão do Banco de Dados
-
-
-// Create table (SQL)
-
-// R = retrieve recuperar os dados salvos da tabela
-// Select * from table (SQL)
-
-// U = Update
-// update from table (SQL)
-
-// D = delete
-// delete * from  table (SQL)
-
-

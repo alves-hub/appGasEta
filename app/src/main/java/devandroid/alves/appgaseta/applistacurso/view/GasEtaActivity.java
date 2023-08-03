@@ -52,6 +52,11 @@ public class GasEtaActivity extends AppCompatActivity {
        objAlterar.setPrecoCombustivel(2.10);
        objAlterar.setRecomendacao("Nao abastecer");
 
+       // fazendo papel da tela e deletando dados
+        controller.deletarObject(18);
+
+
+
        // PASSANDO DADS A SER ALTERADOS PARA CONTROLADORA
        controller.alterarDados(objAlterar);
 

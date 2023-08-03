@@ -33,7 +33,7 @@ public class CombustivelController extends GasEtaDB {
 
         Log.d("MVC Controller","Controller iniciado..." + combustivel.toString());
 
-        // inserindo dados na lista
+        // inserindo dados na lista preference
         listaGasEta.putString("Combustivel", combustivel.getNomeCombustivel());
         listaGasEta.putString ("PreçoCombustivel", String.valueOf(combustivel.getPrecoCombustivel()));
         listaGasEta.putString("Recomendacao",  combustivel.getRecomendacao());
@@ -62,5 +62,10 @@ public class CombustivelController extends GasEtaDB {
 
         //PASSANDO NOME DA TABELA E OS DADOS COLETADOS NO GET PARA METODO DO BANCO DE DADOS GasEtaDB
         alterarObjeto("Combustivel",dados);
+    }
+
+    public void deletarObject(int id) {
+        deletarObject("Combustivel", id);
+
     }
 }
